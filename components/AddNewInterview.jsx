@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { LoaderCircle } from 'lucide-react';
 import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
+
 import {
   Dialog,
   DialogContent,
@@ -26,6 +28,7 @@ const AddNewInterview = () => {
   const [loading, setLoading] = useState(false);
   const [jsonResponse, setJsonResponse] = useState([]);
   const { user } = useUser();
+  const router = useRouter();
 
   const onSubmit = async (e) => {
     setLoading(true);
@@ -64,6 +67,7 @@ const AddNewInterview = () => {
       console.log('mockID: ', resp);
       if (resp) {
         setOpenDialog(false);
+        router.push(`/dashboard/interview/${resp[0]?.mockId}`);
       }
     } catch (error) {
       console.log(error);

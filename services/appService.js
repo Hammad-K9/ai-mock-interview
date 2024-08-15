@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const getAll = async (baseUrl) => {
+const get = async (baseUrl) => {
   const response = await axios.get(baseUrl);
-  return response.data;
+  return response.data[0];
 };
 
 const create = async (baseUrl, newObject) => {
@@ -10,4 +10,4 @@ const create = async (baseUrl, newObject) => {
   return response.data;
 };
 
-export default { getAll, create };
+export default { get, create };
