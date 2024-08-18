@@ -26,7 +26,6 @@ const AddNewInterview = () => {
   const [jobDesc, setJobDesc] = useState();
   const [jobExp, setJobExp] = useState();
   const [loading, setLoading] = useState(false);
-  const [jsonResponse, setJsonResponse] = useState([]);
   const { user } = useUser();
   const router = useRouter();
 
@@ -44,30 +43,29 @@ const AddNewInterview = () => {
       .text()
       .replace('```json', '')
       .replace('```', '');
-    setJsonResponse(jsonRes);
     try {
       console.log(JSON.parse(jsonRes));
-      addInterview();
+      addInterview(jsonRes);
     } catch (error) {
       console.log(error);
     }
     setLoading(false);
   };
 
-  const addInterview = async () => {
+  const addInterview = async (jsonRes) => {
     try {
-      const resp = await appService.create('/api/interview', {
-        jsonMockResp: jsonResponse,
+      const res = await appService.create('/api/interview', {
+        jsonMockResp: jsonRes,
         jobTitle,
         jobDesc,
         jobExp,
         createdBy: user?.primaryEmailAddress?.emailAddress,
         createdAt: Date.now()
       });
-      console.log('mockID: ', resp);
-      if (resp) {
+      console.log('mockID: ', res);
+      if (res) {
         setOpenDialog(false);
-        router.push(`/dashboard/interview/${resp[0]?.mockId}`);
+        router.push(`/dashboard/interview/${res[0]?.mockId}`);
       }
     } catch (error) {
       console.log(error);

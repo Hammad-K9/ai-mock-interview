@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Webcam from 'react-webcam';
 import { Lightbulb, WebcamIcon } from 'lucide-react';
+import Link from 'next/link';
 
 import appService from '@/services/appService';
 import { Button } from '@/components/ui/button';
@@ -18,14 +19,15 @@ const Interview = ({ params }) => {
 
   const getInterviewDetails = async () => {
     try {
-      const resp = await appService.get(`/api/interview/${mockId}`);
-      setInterviewData(resp);
+      const res = await appService.get(`/api/interview/${mockId}`);
+      setInterviewData(res);
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
-    <div className="my-10">
+    <div className="my-10 mb-20">
       <h2 className="font-bold text-2xl">Let's Get Started</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="flex flex-col my-5 gap-2">
@@ -65,8 +67,10 @@ const Interview = ({ params }) => {
           )}
         </div>
       </div>
-      <div className="flex justify-end items-end mt-2">
-        <Button>Start Interview</Button>
+      <div className="flex justify-end items-end my-2">
+        <Link href={`/dashboard/interview/${mockId}/start`}>
+          <Button>Start Interview</Button>
+        </Link>
       </div>
     </div>
   );

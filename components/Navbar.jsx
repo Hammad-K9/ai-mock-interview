@@ -39,6 +39,7 @@ const Navbar = () => {
           className={`hover:text-primary hover:font-bold transition-all cursor-pointer ${
             path === item.path && 'text-primary font-bold'
           }`}
+          key={item.id}
         >
           <div className="flex gap-2">
             <item.icon /> {item.name}
@@ -54,6 +55,7 @@ const Navbar = () => {
             className={`flex gap-2 items-center font-medium p-5 hover:text-primary hover:font-bold transition-all cursor-pointer ${
               path === item.path && 'text-primary font-bold'
             }`}
+            key={item.id}
           >
             <item.icon />
           </li>
