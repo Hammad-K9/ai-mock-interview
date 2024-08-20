@@ -30,7 +30,8 @@
       "import/no-extraneous-dependencies": 0,
       "no-undef": 0,
       "jsx-a11y/click-events-have-key-events": 0,
-      "jsx-a11y/no-static-element-interactions": 0
+      "jsx-a11y/no-static-element-interactions": 0,
+      "no-unsafe-optional-chaining": 1
     }
   },
   "dependencies": {
@@ -48,11 +49,13 @@
     "eslint-config-wesbos": "^4.0.1",
     "lucide-react": "^0.408.0",
     "next": "14.2.5",
+    "next-themes": "^0.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-speech-to-text": "^0.8.0",
     "react-webcam": "^7.2.0",
     "short-unique-id": "^5.2.0",
+    "sonner": "^1.5.0",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7"
   },

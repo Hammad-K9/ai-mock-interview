@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { UserButton } from '@clerk/nextjs';
-import NavBar from './Navbar';
+import NavBar from '@/components/Navbar';
 
 const Header = () => {
   useEffect(() => {}, []);

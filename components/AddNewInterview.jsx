@@ -32,7 +32,6 @@ const AddNewInterview = () => {
   const onSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    console.log(jobTitle, jobDesc, jobExp);
     const inputPrompt = `Based on the the following information, give me ${process.env.NEXT_PUBLIC_INTERVIEW_QUESTION_COUNT} interview questions with answers in JSON format. Give the questions and answers as fields in JSON:
     Job Title: ${jobTitle}
     Job Description: ${jobDesc}
@@ -44,7 +43,6 @@ const AddNewInterview = () => {
       .replace('```json', '')
       .replace('```', '');
     try {
-      console.log(JSON.parse(jsonRes));
       addInterview(jsonRes);
     } catch (error) {
       console.log(error);
@@ -62,7 +60,6 @@ const AddNewInterview = () => {
         createdBy: user?.primaryEmailAddress?.emailAddress,
         createdAt: Date.now()
       });
-      console.log('mockID: ', res);
       if (res) {
         setOpenDialog(false);
         router.push(`/dashboard/interview/${res[0]?.mockId}`);
