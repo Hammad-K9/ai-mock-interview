@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
-import { format } from 'date-fns';
 
 import { db } from '@/utils/drizzledb';
 import { UserAnswer } from '@/utils/schema';
@@ -29,8 +28,6 @@ export async function POST(req) {
       });
     }
 
-    const createdAtFormatted = format(new Date(+createdAt), 'MM/dd/yyyy');
-
     const userAnswer = await db
       .insert(UserAnswer)
       .values({
@@ -41,7 +38,7 @@ export async function POST(req) {
         feedback,
         rating,
         createdBy,
-        createdAt: createdAtFormatted
+        createdAt
       })
       .returning();
 
