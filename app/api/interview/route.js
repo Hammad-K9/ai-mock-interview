@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs/server';
-import { format } from 'date-fns';
+import { auth, currentUser } from '@clerk/nextjs/server';
 
+import { desc, eq } from 'drizzle-orm';
 import { db } from '@/utils/drizzledb';
 import { MockInterview } from '@/utils/schema';
 
@@ -24,8 +24,6 @@ export async function POST(req) {
       );
     }
 
-    const createdAtFormatted = format(new Date(+createdAt), 'MM/dd/yyyy');
-
     const interview = await db
       .insert(MockInterview)
       .values({
@@ -34,13 +32,38 @@ export async function POST(req) {
         jobDesc,
         jobExp,
         createdBy,
-        createdAt: createdAtFormatted
+        createdAt
       })
       .returning({ mockId: MockInterview.mockId });
 
     return NextResponse.json(interview);
   } catch (error) {
     console.log('[INTERVIEWS_POST]', error);
+    return new NextResponse('Internal error', { status: 500 });
+  }
+}
+
+export async function GET(req) {
+  try {
+    const user = await currentUser();
+
+    if (!user) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
+
+    const { emailAddress } = user.emailAddresses.find(
+      (email) => email.id === user.primaryEmailAddressId
+    );
+
+    const interviewList = await db
+      .select()
+      .from(MockInterview)
+      .where(eq(MockInterview.createdBy, emailAddress))
+      .orderBy(desc(MockInterview.createdAt));
+
+    return NextResponse.json(interviewList);
+  } catch (error) {
+    console.log('[INTERVIEW_GET_ALL]', error);
     return new NextResponse('Internal error', { status: 500 });
   }
 }

@@ -17,7 +17,7 @@ const QuestionsSection = ({ questions, activeQuestion, setActiveQuestion }) => {
     questions && (
       <div className="p-5 border rounded-lg my-10">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {questions.map((q, i) => (
+          {questions?.map((q, i) => (
             <Button
               key={i}
               className={`p-2 rounded-full text-xs md:text-sm text-center cursor-pointer ${activeQuestion === i ? 'bg-primary text-white' : 'bg-secondary text-black'}`}

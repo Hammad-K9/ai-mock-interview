@@ -32,7 +32,7 @@ const AddNewInterview = () => {
   const onSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    const inputPrompt = `Based on the the following information, give me ${process.env.NEXT_PUBLIC_INTERVIEW_QUESTION_COUNT} interview questions with answers in JSON format. Give the questions and answers as fields in JSON:
+    const inputPrompt = `Based on the the following information, give me ${process.env.NEXT_PUBLIC_INTERVIEW_QUESTION_COUNT} interview questions with answers in JSON format. Give the questions and answers as fields in JSON, and format the answer as an object with 1 property called questions. The property questions will contain an array of objects that each have 2 properties: 1 property is named question and the other named answer. The information is as follows: 
     Job Title: ${jobTitle}
     Job Description: ${jobDesc}
     Years of Experience: ${jobExp}
