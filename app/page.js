@@ -1,10 +1,22 @@
-import { Button } from '@/components/ui/button';
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
 
-export default function Home() {
+import LandingPageHeader from '@/components/LandingPageHeader';
+import Hero from '@/components/Hero';
+
+const Home = () => {
+  const { userId } = auth();
+
+  if (userId) {
+    redirect('/dashboard');
+  }
+
   return (
     <div>
-      <h2>Subscribe</h2>
-      <Button>Click</Button>
+      <LandingPageHeader />
+      <Hero />
     </div>
   );
-}
+};
+
+export default Home;
