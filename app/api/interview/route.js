@@ -63,7 +63,7 @@ export async function GET(req) {
 
     return NextResponse.json(interviewList);
   } catch (error) {
-    console.log('[INTERVIEW_GET_ALL]', error);
+    console.log('[INTERVIEWS_GET_ALL]', error);
     return new NextResponse('Internal error', { status: 500 });
   }
 }

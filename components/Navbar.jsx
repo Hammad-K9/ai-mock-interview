@@ -17,21 +17,9 @@ const Navbar = () => {
     },
     {
       id: 1,
-      name: 'Questions',
-      icon: CircleHelp,
-      path: '/dashboard/questions'
-    },
-    {
-      id: 2,
       name: 'Upgrade',
       icon: ShieldPlus,
-      path: '/dashboard/upgrade'
-    },
-    {
-      id: 3,
-      name: 'How It Works',
-      icon: Sparkle,
-      path: '/dashboard/howitworks'
+      path: '/upgrade'
     }
   ];
 

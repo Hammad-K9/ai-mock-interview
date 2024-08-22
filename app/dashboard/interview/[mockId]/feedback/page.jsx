@@ -37,7 +37,7 @@ const Feedback = ({ params }) => {
   };
 
   return (
-    <div className="p-10">
+    <div className="p-5 mb-20">
       <h2 className="text-3xl font-bold">Here is your interview feedback</h2>
       {feedbackList?.length === 0 ? (
         <div className="font-bold text-lg text-gray-500 my-3">
